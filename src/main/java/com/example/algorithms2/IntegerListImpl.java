@@ -174,6 +174,7 @@ public class IntegerListImpl implements IntegerList{
         for (int i = 0; i < this.data.length; i++) {
             this.data[i]= random.nextInt(-50000,50000);
         }
+        size=this.data.length;
     }
 
     // сортировка массива пузырьковая

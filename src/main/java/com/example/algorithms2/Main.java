@@ -17,6 +17,8 @@ public class Main {
         long start2 = System.currentTimeMillis();
         integerList2.sortInsertion();
         System.out.println(System.currentTimeMillis() - start2);
-        // метод sortInsertion() выполняется быстрее остальных
+//         метод sortInsertion() выполняется быстрее остальных
+
+
     }
 }
