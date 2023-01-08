@@ -16,7 +16,13 @@ public class IntegerListImpl implements IntegerList{
         checkItemIsNull(item);
         grow();
         size++;
-        this.data[this.data.length-1]=item;
+        for (int i = 0; i < this.data.length; i++) {
+            if (i == 0) {
+                this.data[i] = item;
+            } else {
+                this.data[this.data.length-1]=item;
+            }
+        }
         return item;
     }
 
@@ -24,10 +30,12 @@ public class IntegerListImpl implements IntegerList{
     public Integer add(int index, Integer item) {
         checkItemIsNull(item);
         checkIndex(index);
-        grow();
-        size++;
         System.arraycopy(this.data,index,this.data,index+1,this.data.length-index-1);
         this.data[index] = item;
+        if (this.data.length == size) {
+            grow();
+            size++;
+        }
         return item;
     }
 
@@ -160,7 +168,7 @@ public class IntegerListImpl implements IntegerList{
         }
     }
     private void grow() {
-        this.data = Arrays.copyOf(this.data, this.data.length + 1);
+        this.data = Arrays.copyOf(this.data, (int) (this.data.length*1.5));
     }
 
     private void decrease() {
@@ -225,11 +233,12 @@ public class IntegerListImpl implements IntegerList{
             int mid = (min + max) / 2;
             if (element == this.data[mid]) {
                 return true;
-            }
-            if (element < this.data[mid]) {
+            } else if (element < this.data[mid]) {
                 max = mid - 1;
+                return true;
             } else {
                 min = mid + 1;
+                return true;
             }
         }
         return false;
